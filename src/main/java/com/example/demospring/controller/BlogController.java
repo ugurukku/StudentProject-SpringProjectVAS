@@ -14,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class    BlogController {
 
+
+    // open api - swagger
     private final BlogManager manager;
 
     @GetMapping

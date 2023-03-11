@@ -11,7 +11,7 @@ public interface UserService {
 
     UserDTO getById(int id);
 
-    User saveUser(User user);
+    User saveUser(UserDTO user);
 
     void deleteUser(int id);
 }

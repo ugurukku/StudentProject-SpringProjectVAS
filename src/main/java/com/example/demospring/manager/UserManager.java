@@ -3,6 +3,7 @@ package com.example.demospring.manager;
 
 import com.example.demospring.dto.UserDTO;
 import com.example.demospring.dto.UserDTOManager;
+import com.example.demospring.dto.UserMapper;
 import com.example.demospring.entity.User;
 import com.example.demospring.exception.UserNotFoundException;
 import com.example.demospring.repository.UserRepository;
@@ -18,6 +19,8 @@ public class UserManager implements UserService {
 
     private final UserRepository userRepository;
     private final UserDTOManager userDTOManager;
+
+    private final UserMapper userMapper;
 
     @Override
     public List<UserDTO> getAll() {
@@ -37,9 +40,8 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-        userRepository.save(user);
-        return user;
+    public User saveUser(UserDTO dto) {
+        return userRepository.save(userMapper.apply(dto));
     }
 
     @Override
