@@ -1,4 +1,4 @@
-package com.example.demospring.manager;
+package com.example.demospring.service.impl;
 
 
 import com.example.demospring.dto.UserDTO;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserManager implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserDTOManager userDTOManager;

@@ -1,8 +1,7 @@
 package com.example.demospring.controller;
 
 import com.example.demospring.entity.Blog;
-import com.example.demospring.entity.User;
-import com.example.demospring.manager.BlogManager;
+import com.example.demospring.service.impl.BlogServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class    BlogController {
 
 
     // open api - swagger
-    private final BlogManager manager;
+    private final BlogServiceImpl manager;
 
     @GetMapping
     public List<Blog> getAll(){

@@ -1,10 +1,9 @@
 package com.example.demospring.entity;
 
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -13,8 +12,15 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @SequenceGenerator(
+            name = "user_id_sequence",
+            sequenceName = "user_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_id_sequence"
+    )
+    private Long id;
 
     @Column(name = "tam_ad")
     private String fullName;

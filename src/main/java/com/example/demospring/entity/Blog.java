@@ -1,20 +1,24 @@
 package com.example.demospring.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity(name = "paylashimlar")
 public class Blog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-            @Column(nullable = false)
-    Integer id;
+    @SequenceGenerator(
+            name = "blog_id_sequence",
+            sequenceName = "blog_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "blog_id_sequence"
+    )
+    @Column(nullable = false)
+    Long id;
 
     @Column(name = "blog_bashligi")
     String header;

@@ -2,8 +2,7 @@ package com.example.demospring.controller;
 
 
 import com.example.demospring.dto.UserDTO;
-import com.example.demospring.entity.User;
-import com.example.demospring.manager.UserManager;
+import com.example.demospring.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,26 +14,26 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
-    private final UserManager userManager;
+    private final UserServiceImpl userServiceImpl;
 
     @GetMapping
     public List<UserDTO> getAll(){
-        return userManager.getAll();
+        return userServiceImpl.getAll();
     }
 
     @GetMapping("/{id}")
     public UserDTO getById(@PathVariable int id){
-        return userManager.getById(id);
+        return userServiceImpl.getById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public void saveUser(@RequestBody UserDTO user){
-        userManager.saveUser(user);
+        userServiceImpl.saveUser(user);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable int id){
-        userManager.deleteUser(id);
+        userServiceImpl.deleteUser(id);
     }
 }

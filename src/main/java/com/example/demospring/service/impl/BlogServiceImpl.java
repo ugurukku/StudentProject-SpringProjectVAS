@@ -1,7 +1,6 @@
-package com.example.demospring.manager;
+package com.example.demospring.service.impl;
 
 import com.example.demospring.entity.Blog;
-import com.example.demospring.entity.User;
 import com.example.demospring.repository.BlogRepository;
 import com.example.demospring.service.BlogService;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class BlogManager implements BlogService {
+public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository repository;
 
