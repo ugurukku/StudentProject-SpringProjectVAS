@@ -14,4 +14,6 @@ public interface UserService {
     User saveUser(UserDTO user);
 
     void deleteUser(int id);
+
+    List<UserDTO> getAllPage(int page, int count);
 }

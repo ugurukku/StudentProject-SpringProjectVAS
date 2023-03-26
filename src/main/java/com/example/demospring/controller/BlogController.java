@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/blogs")
 @AllArgsConstructor
-public class    BlogController {
+public class BlogController {
 
 
     // open api - swagger
