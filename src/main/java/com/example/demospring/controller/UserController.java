@@ -2,7 +2,7 @@ package com.example.demospring.controller;
 
 
 import com.example.demospring.dto.UserDTO;
-import com.example.demospring.service.impl.UserServiceImpl;
+import com.example.demospring.serviceImpl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,11 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-
 public class UserController {
 
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserServiceImpl userServiceImpl;
 
@@ -26,16 +24,8 @@ public class UserController {
 
     @GetMapping
     public List<UserDTO> getAll() {
-        logger.info("User getAll accepted request");
+        logger.info("getAll request accepted");
         return userServiceImpl.getAll();
-    }
-
-    @GetMapping("/page")
-    public List<UserDTO> getAllPage(
-            @RequestParam(name = "page") int page,
-            @RequestParam(name = "count") int count
-    ){
-        return userServiceImpl.getAllPage(page,count);
     }
 
     @GetMapping("/{id}")

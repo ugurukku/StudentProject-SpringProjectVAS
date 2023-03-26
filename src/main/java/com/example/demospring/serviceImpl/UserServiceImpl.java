@@ -1,4 +1,4 @@
-package com.example.demospring.service.impl;
+package com.example.demospring.serviceImpl;
 
 
 import com.example.demospring.dto.UserDTO;
@@ -13,20 +13,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper;
+    private final UserMapper mapper;
+
 
     @Override
     public List<UserDTO> getAll() {
         return userRepository.findAll()
                 .stream()
-                .map(userMapper::toUserDto)
+                .map(mapper::toUserDto)
                 .toList();
     }
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getById(int id) {
         return userRepository.findById(id)
                 .stream()
-                .map(userMapper::toUserDto)
+                .map(mapper::toUserDto)
                 .findFirst()
                 .orElseThrow(()->new UserNotFoundException("User tapilmadi"));
 
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(UserDTO dto) {
-        return userRepository.save(userMapper.toEntity(dto));
+        return userRepository.save(mapper.toEntity(dto));
     }
 
     @Override
@@ -50,16 +50,4 @@ public class UserServiceImpl implements UserService {
        userRepository.deleteById(id);
     }
 
-    @Override
-    public List<UserDTO> getAllPage(int page, int count) {
-
-      Page<User> users = userRepository.findAll(PageRequest.of(page,count));
-
-     return   users
-              .getContent()
-              .stream()
-              .map(userMapper::toUserDto)
-              .toList();
-
-    }
 }

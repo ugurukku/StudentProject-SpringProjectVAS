@@ -1,4 +1,4 @@
-package com.example.demospring.service.impl;
+package com.example.demospring.serviceImpl;
 
 import com.example.demospring.entity.Blog;
 import com.example.demospring.repository.BlogRepository;
