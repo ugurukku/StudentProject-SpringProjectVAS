@@ -2,6 +2,7 @@ package com.example.demospring.serviceImpl;
 
 
 import com.example.demospring.dto.UserDTO;
+import com.example.demospring.dto.UserPageResponse;
 import com.example.demospring.entity.User;
 import com.example.demospring.exception.UserNotFoundException;
 import com.example.demospring.mapper.UserMapper;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -23,11 +23,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<UserDTO> getAll() {
-        return userRepository.findAll()
-                .stream()
-                .map(mapper::toUserDto)
-                .toList();
+    public UserPageResponse getAll(int page, int count) {
+
+        Page<User> userPage = userRepository.findAll(PageRequest.of(page, count));
+
+
+        return new UserPageResponse(
+                userPage.getContent().stream().map(mapper::toUserDto).toList(),
+                userPage.getTotalElements(),
+                userPage.getTotalPages(),
+                userPage.hasNext()
+        );
     }
 
     @Override

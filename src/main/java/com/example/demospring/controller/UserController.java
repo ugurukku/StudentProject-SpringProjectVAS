@@ -2,6 +2,7 @@ package com.example.demospring.controller;
 
 
 import com.example.demospring.dto.UserDTO;
+import com.example.demospring.dto.UserPageResponse;
 import com.example.demospring.serviceImpl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,13 @@ public class UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
+
+
+
     @GetMapping
-    public List<UserDTO> getAll() {
+    public UserPageResponse getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count) {
         logger.info("getAll request accepted");
-        return userServiceImpl.getAll();
+        return userServiceImpl.getAll(page,count);
     }
 
     @GetMapping("/{id}")
