@@ -1,6 +1,8 @@
 package com.example.demospring.serviceImpl;
 
+import com.example.demospring.dto.BlogRequest;
 import com.example.demospring.entity.Blog;
+import com.example.demospring.mapper.BlogMapper;
 import com.example.demospring.repository.BlogRepository;
 import com.example.demospring.service.BlogService;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BlogServiceImpl implements BlogService {
 
+    private final BlogMapper mapper;
     private final BlogRepository repository;
 
     @Override
@@ -26,8 +29,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void saveBlog(Blog blog) {
-        repository.save(blog);
+    public void saveBlog(BlogRequest request) {
+        repository.save(mapper.blogRequestToEntity(request));
     }
 
     @Override

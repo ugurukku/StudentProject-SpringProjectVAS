@@ -1,40 +1,49 @@
 package com.example.demospring.exception;
 
-import com.example.demospring.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
 
 @ControllerAdvice
 @Slf4j
-public class CustomizedException extends ResponseEntityExceptionHandler {
+public class CustomizedException  {
 
 
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    public final ResponseEntity<Object> handleUserNotFound(UserNotFoundException ex, WebRequest request) throws Exception {
+    public  ResponseEntity<Object> handleUserNotFound(UserNotFoundException ex)  {
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
                 ex.getMessage(),
-                request.getDescription(false));
+                null);
         log.error("User not found");
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) throws Exception {
+    public ResponseEntity<Object> handleArgumentException(MethodArgumentNotValidException ex) {
+
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
-                ex.getMessage(),
-                request.getDescription(false));
+                ex.getBindingResult().getFieldError().getDefaultMessage(),
+                null);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public final ResponseEntity<Object> handleAllException(Exception ex) {
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+                ex.getMessage(),
+                null);
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

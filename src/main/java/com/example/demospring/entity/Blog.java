@@ -11,7 +11,8 @@ public class Blog {
     @Id
     @SequenceGenerator(
             name = "blog_id_sequence",
-            sequenceName = "blog_id_sequence"
+            sequenceName = "blog_id_sequence",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

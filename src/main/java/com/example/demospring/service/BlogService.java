@@ -1,5 +1,6 @@
 package com.example.demospring.service;
 
+import com.example.demospring.dto.BlogRequest;
 import com.example.demospring.entity.Blog;
 import com.example.demospring.entity.User;
 
@@ -12,7 +13,7 @@ public interface BlogService {
 
     Blog getById(int id);
 
-    void saveBlog(Blog blog);
+    void saveBlog(BlogRequest request);
 
     void deleteBlog(int id);
 

@@ -1,5 +1,6 @@
 package com.example.demospring.controller;
 
+import com.example.demospring.dto.BlogRequest;
 import com.example.demospring.entity.Blog;
 import com.example.demospring.serviceImpl.BlogServiceImpl;
 import lombok.AllArgsConstructor;
@@ -29,9 +30,8 @@ public class BlogController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void saveUser(@RequestBody Blog blog){
-        System.out.println(blog.getUser());
-        manager.saveBlog(blog);
+    public void saveBlog(@RequestBody BlogRequest request){
+        manager.saveBlog(request);
     }
 
     @DeleteMapping("/{id}")

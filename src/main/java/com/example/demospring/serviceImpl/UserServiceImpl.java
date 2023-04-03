@@ -1,7 +1,7 @@
 package com.example.demospring.serviceImpl;
 
 
-import com.example.demospring.dto.UserDTO;
+import com.example.demospring.dto.UserRequestResponse;
 import com.example.demospring.dto.UserPageResponse;
 import com.example.demospring.entity.User;
 import com.example.demospring.exception.UserNotFoundException;
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getById(int id) {
+    public UserRequestResponse getById(int id) {
         return userRepository.findById(id)
                 .stream()
                 .map(mapper::toUserDto)
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(UserDTO dto) {
+    public User saveUser(UserRequestResponse dto) {
         return userRepository.save(mapper.toEntity(dto));
     }
 
