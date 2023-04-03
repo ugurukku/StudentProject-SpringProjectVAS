@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 public record UserRequestResponse(
-
+// csrf
         @NotNull(message = "fullName null olmamalidir")
         @NotEmpty(message = "fullName empty olmamalidir")
         @NotBlank(message = "fullName blank olmamalidir")

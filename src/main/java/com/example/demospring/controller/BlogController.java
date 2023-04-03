@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/blogs")
 @AllArgsConstructor
 public class BlogController {
-
+// FORM BASED AUTHENTICATION
 
     // open api - swagger
     private final BlogServiceImpl manager;
