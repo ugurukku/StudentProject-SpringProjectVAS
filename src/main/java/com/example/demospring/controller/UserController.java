@@ -1,12 +1,14 @@
 package com.example.demospring.controller;
 
 
+import com.example.demospring.dto.RegisterRequest;
 import com.example.demospring.dto.UserRequestResponse;
 import com.example.demospring.dto.UserPageResponse;
 import com.example.demospring.entity.User;
 import com.example.demospring.service.UserService;
 import com.example.demospring.serviceImpl.UserServiceImpl;
 import jakarta.validation.Valid;
+import jdk.jfr.StackTrace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -48,5 +50,11 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
+    }
+
+    @PostMapping("/register")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public void register(@RequestBody @Valid RegisterRequest request) {
+        userService.register(request);
     }
 }

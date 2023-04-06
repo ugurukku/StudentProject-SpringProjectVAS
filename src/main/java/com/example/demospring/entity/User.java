@@ -29,6 +29,13 @@ public class User {
     @Column(name = "tevellud")
     private LocalDate age;
 
+    private String email;
+
+    private String password;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     public User(String fullName, LocalDate age) {
         this.fullName = fullName;
         this.age = age;
