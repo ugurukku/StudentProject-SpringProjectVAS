@@ -8,10 +8,16 @@ import com.example.demospring.entity.User;
 import com.example.demospring.exception.UserNotFoundException;
 import com.example.demospring.mapper.UserMapper;
 import com.example.demospring.repository.UserRepository;
+import com.example.demospring.security.JwtService;
+import com.example.demospring.security.MyUserDetails;
 import com.example.demospring.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +30,9 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
 
     private final PasswordEncoder encoder;
+
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
 
     @Override
@@ -72,6 +81,20 @@ public class UserServiceImpl implements UserService {
         User user = mapper.toUserFromRegisterRequest(request);
         user.setPassword(encoder.encode(request.password()));
         userRepository.save(user);
+    }
+
+    @Override
+    public String login(RegisterRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.email(),
+                        request.password()
+                )
+        );
+
+        UserDetails user = mapper.toMyUserDetails(getUserByEmail(request.email()));
+
+        return jwtService.generateToken(user);
     }
 
 }

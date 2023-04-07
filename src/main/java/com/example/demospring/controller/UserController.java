@@ -57,4 +57,10 @@ public class UserController {
     public void register(@RequestBody @Valid RegisterRequest request) {
         userService.register(request);
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody @Valid RegisterRequest request) {
+        return userService.login(request);
+    }
+
 }

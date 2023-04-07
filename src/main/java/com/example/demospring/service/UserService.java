@@ -19,4 +19,6 @@ public interface UserService {
     User getUserByEmail(String email);
 
     void register(RegisterRequest request);
+
+    String login(RegisterRequest request);
 }
