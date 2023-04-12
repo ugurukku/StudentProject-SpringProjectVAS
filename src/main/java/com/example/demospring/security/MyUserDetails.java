@@ -19,6 +19,7 @@ public class MyUserDetails implements UserDetails {
         this.email = email;
         this.password = password;
         this.isActive = isActive;
+        // ehdbwqkjdbhhajkdhjA
     }
 
     @Override
