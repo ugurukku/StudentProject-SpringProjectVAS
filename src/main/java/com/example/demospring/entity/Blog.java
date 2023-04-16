@@ -1,11 +1,17 @@
 package com.example.demospring.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity(name = "paylashimlar")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Blog {
 
     @Id
